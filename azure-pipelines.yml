@@ -4,9 +4,7 @@ trigger:
 pool:
   name: Default   # self-hosted agent (Siri)
 
-variables:
 
-  TF_WORKING_DIR: 'terraform'   # change if your tf files are in root
 
 stages:
 - stage: Terraform
@@ -33,7 +31,7 @@ stages:
       displayName: Terraform Init
       inputs:
         targetType: inline
-        workingDirectory: $(TF_WORKING_DIR)
+      
         script: |
           terraform init
 
@@ -42,7 +40,7 @@ stages:
       displayName: Terraform Validate
       inputs:
         targetType: inline
-        workingDirectory: $(TF_WORKING_DIR)
+      
         script: |
           terraform validate
 
@@ -51,7 +49,7 @@ stages:
       displayName: Terraform Plan
       inputs:
         targetType: inline
-        workingDirectory: $(TF_WORKING_DIR)
+   
         script: |
           terraform plan -out=tfplan
 
@@ -61,7 +59,7 @@ stages:
       condition: false   # 👈 Apply will NEVER run
       inputs:
         targetType: inline
-        workingDirectory: $(TF_WORKING_DIR)
+  
         script: |
           terraform apply -auto-approve tfplan
 
