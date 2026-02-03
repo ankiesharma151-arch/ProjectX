@@ -18,13 +18,9 @@ stages:
     - checkout: self
 
     # Install Terraform
-    - task: PowerShell@2
-      displayName: Install Terraform
+    - task: TerraformInstaller@1
       inputs:
-        targetType: inline
-        script: |
-          choco install terraform -y
-          terraform -version
+        terraformVersion: 'latest'
 
     # Terraform Init
     - task: PowerShell@2
